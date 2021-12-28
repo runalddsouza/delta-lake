@@ -4,9 +4,9 @@ import pyspark
 from pyspark.sql import SparkSession, DataFrame
 from pyspark.sql import functions as F
 
-import functions
-from configuration import Configuration
-from spark_job import SparkJob
+from jobs.common.configuration import *
+from jobs.common.functions import *
+from jobs.common.spark_job import SparkJob
 
 
 class BuildTable(SparkJob, ABC):
@@ -27,7 +27,7 @@ class BuildTable(SparkJob, ABC):
     def execute(self):
         df = self.transform(self.load_df())
         df.withColumn(self.config.partition_key,
-                      functions.get_partition_udf(F.col(self.config.key), F.lit(self.config.partition_keys))) \
+                      get_partition_udf(F.col(self.config.key), F.lit(self.config.partition_keys))) \
             .repartition(self.config.partitions) \
             .write \
             .partitionBy(self.config.partition_key) \

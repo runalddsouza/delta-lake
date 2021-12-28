@@ -5,8 +5,8 @@ import requests
 from pyspark.sql import DataFrame
 from pyspark.sql.functions import expr
 
-import configuration
 from build_table import BuildTable
+from jobs.common.configuration import *
 
 
 class SpiBuildTable(BuildTable):
@@ -19,4 +19,4 @@ class SpiBuildTable(BuildTable):
 
 
 if __name__ == '__main__':
-    SpiBuildTable(configuration.load()).run()
+    SpiBuildTable(load()).run()
