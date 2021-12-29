@@ -19,4 +19,4 @@ class SpiBuildTable(BuildTable):
 
 
 if __name__ == '__main__':
-    SpiBuildTable(load()).run()
+    SpiBuildTable(table_load_config()).run()
